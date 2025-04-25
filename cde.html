@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 첫 웹페이지</title>
+    <style>
+        /* 간단한 스타일링 */
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .button-container {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        .message-container {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>홈 페이지</h1>
+    <div class="button-container">
+        <button id="abcBtn">abc</button>
+        <button id="wxyBtn">wxy</button>
+    </div>
+
+    <div id="abcPage" class="hidden">
+        <h2>환영합니다 abc가 제일 좋아요</h2>
+        <button class="homeBtn">home</button>
+    </div>
+
+    <div id="wxyPage" class="hidden">
+        <h2>wxy clinked</h2>
+        <button class="homeBtn">home</button>
+    </div>
+
+    <script>
+        const abcBtn = document.getElementById('abcBtn');
+        const wxyBtn = document.getElementById('wxyBtn');
+        const abcPage = document.getElementById('abcPage');
+        const wxyPage = document.getElementById('wxyPage');
+        const homeBtns = document.querySelectorAll('.homeBtn');
+
+        abcBtn.addEventListener('click', () => {
+            document.querySelector('h1').style.display = 'none';
+            document.querySelector('.button-container').style.display = 'none';
+            abcPage.classList.remove('hidden');
+            wxyPage.classList.add('hidden');
+        });
+
+        wxyBtn.addEventListener('click', () => {
+            document.querySelector('h1').style.display = 'none';
+            document.querySelector('.button-container').style.display = 'none';
+            wxyPage.classList.remove('hidden');
+            abcPage.classList.add('hidden');
+        });
+
+        homeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelector('h1').style.display = 'block';
+                document.querySelector('.button-container').style.display = 'block';
+                abcPage.classList.add('hidden');
+                wxyPage.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
