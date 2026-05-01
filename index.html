@@ -1,205 +1,143 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>북마실 2026년 4월</title>
+  <meta charset="UTF-8">
+  <title>노래 가사 찾기</title>
   <style>
-    :root {
-      --frame-border: 0.35rem;
-      --caption-height: 64px;
-      --page-padding: 1.2rem;
-      --screen-gap: 0;
-      --paper-width: 210mm;
-      --paper-height: 297mm;
-      --paper-padding: 14mm;
-      --paper-border: 0.5mm;
-      --paper-radius: 4mm;
-      --caption-size: 12pt;
-    }
-
-    * { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
-    }
-
-    .toolbar {
-      position: fixed;
-      top: 14px;
-      right: 14px;
-      z-index: 20;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(6px);
-      font-size: 13px;
-      line-height: 1.4;
-      color: #f4f4f4;
-    }
-
-    .pages {
-      display: flex;
-      flex-direction: column;
-      gap: var(--screen-gap);
-    }
-
-    .page {
-      width: 100%;
-      min-height: 100vh;
-      height: 100vh;
-      padding: var(--page-padding);
-      display: flex;
-      align-items: stretch;
-      justify-content: stretch;
-      scroll-snap-align: start;
-    }
-
-    .image-card {
-      width: 100%;
-      height: 100%;
-      border: var(--frame-border) solid rgba(255, 255, 255, 0.65);
-      border-radius: 1rem;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      background: #000;
-      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
-    }
-
-    .image-card img {
-      width: 100%;
-      height: calc(100% - var(--caption-height));
-      object-fit: contain;
-      display: block;
-      background: #000;
-    }
-
-    .caption {
-      height: var(--caption-height);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 1rem;
-      text-align: center;
-      font-size: 1rem;
-      line-height: 1.35;
-      background: #fff;
-      color: #111;
-      border-top: 1px solid rgba(0, 0, 0, 0.18);
-    }
-
-    @media (max-width: 768px) {
-      :root {
-        --page-padding: 0.6rem;
-        --frame-border: 0.2rem;
-        --caption-height: 56px;
-      }
-
-      .toolbar {
-        left: 10px;
-        right: 10px;
-        top: 10px;
-        border-radius: 12px;
-      }
-    }
-
-    @page {
-      size: A4 portrait;
-      margin: 0;
-    }
-
-    @media print {
-      body {
-        background: #fff;
-        color: #222;
-      }
-
-      .toolbar {
-        display: none;
-      }
-
-      .pages {
-        display: block;
-      }
-
-      .page {
-        width: var(--paper-width);
-        height: var(--paper-height);
-        min-height: var(--paper-height);
-        padding: var(--paper-padding);
-        margin: 0;
-        display: flex;
-        background: #fff;
-        break-after: page;
-      }
-
-      .page:last-child {
-        break-after: auto;
-      }
-
-      .image-card {
-        width: 100%;
-        height: 100%;
-        border: var(--paper-border) solid #666;
-        border-radius: var(--paper-radius);
-        box-shadow: none;
-        background: #fafafa;
-      }
-
-      .image-card img {
-        height: auto;
-        flex: 1;
-        min-height: 0;
-        object-fit: contain;
-        background: #fff;
-      }
-
-      .caption {
-        height: auto;
-        min-height: auto;
-        padding: 5mm;
-        font-size: var(--caption-size);
-        color: #222;
-        background: #fff;
-        border-top: var(--paper-border) solid #999;
-      }
-    }
+    body { font-family: Arial; text-align: center; }
+    .hidden { display: none; }
+    .btn { margin: 10px; padding: 10px 20px; cursor: pointer; border: 1px solid #333; display: inline-block; }
+    img { max-width: 80%; margin-top: 20px; }
+    .back { width: 50px; cursor: pointer; }
   </style>
 </head>
 <body>
-  <div class="toolbar">
-    T. S. Elliot, April is the cruellest month...
-  </div>
 
-  <main class="pages">
-    <section class="page">
-      <article class="image-card">
-        <img src="./c.png" alt="사우" />
-        <div class="caption">사우</div>
-      </article>
-    </section>
+<!-- ROOT PAGE -->
+<div id="root">
+  <h2>분야 선택</h2>
+  <div class="btn" onclick="openCategory('7080a')">7080a</div>
+  <div class="btn" onclick="openCategory('7080b')">7080b</div>
+  <div class="btn" onclick="openCategory('7080c')">7080c</div>
+  <div class="btn" onclick="openCategory('902000')">902000</div>
+  <div class="btn" onclick="openCategory('외국가곡')">외국가곡</div>
+  <div class="btn" onclick="openCategory('한국가곡')">한국가곡</div>
+  <div class="btn" onclick="openCategory('만화영화')">만화영화 주제가</div>
+  <div class="btn" onclick="openCategory('CM송')">CM송</div>
+</div>
 
-    <section class="page">
-      <article class="image-card">
-        <img src="./a.png" alt="2페이지 그림" />
-        <div class="caption">봄날은 간다</div>
-      </article>
-    </section>
+<!-- SONG LIST PAGE -->
+<div id="songs" class="hidden">
+  <img src="arrow.png" class="back" onclick="goRoot()">
+  <h2 id="categoryTitle"></h2>
+  <div id="songList"></div>
+</div>
 
-    <section class="page">
-      <article class="image-card">
-        <img src="./b.png" alt="3페이지 그림" />
-        <div class="caption">MZ의 봄봄봄 </div>
-      </article>
-    </section>
-  </main>
+<!-- LYRICS PAGE -->
+<div id="lyrics" class="hidden">
+  <img src="arrow.png" class="back" onclick="goSongs()">
+  <h2 id="songTitle"></h2>
+  <img id="lyricsImg" src="">
+</div>
+
+<script>
+const data = {
+  "7080a": [
+    {name:"친구", file:"78a1.png"},
+    {name:"저 별과 달을", file:"78a2.png"},
+    {name:"하얀 나비", file:"78a3.png"},
+    {name:"그건 너", file:"78a4.png"},
+    {name:"솔개", file:"78a5.png"}
+  ],
+  "7080b": [
+    {name:"나 어떻게", file:"78b1.png"},
+    {name:"한잔의 추억", file:"78b2.png"},
+    {name:"사노라면", file:"78b3.png"},
+    {name:"한동안 뜸했었지", file:"78b4.png"},
+    {name:"남자는 배 여자는 항구", file:"78b5.png"}
+  ],
+  "7080c": [
+    {name:"행복의 나라로", file:"78c1.png"},
+    {name:"고래 사냥", file:"78c2.png"},
+    {name:"이루어질 수 없는 사랑", file:"78c3.png"},
+    {name:"아침이슬", file:"78c4.png"},
+    {name:"밤배", file:"78c5.png"}
+  ],
+  "902000": [
+    {name:"준비없는 이별", file:"921.png"},
+    {name:"사랑할수록", file:"922.png"},
+    {name:"사람이 꽃보다 아름다워", file:"923.png"},
+    {name:"걱정말아요 그대", file:"924.png"},
+    {name:"봄봄봄", file:"925.png"}
+  ],
+  "한국가곡": [
+    {name:"동무생각", file:"k1.png"},
+    {name:"사공의노래", file:"k2.png"},
+    {name:"떠나가는 배", file:"k3.png"},
+    {name:"희망의 나라로", file:"k4.png"},
+    {name:"비목", file:"k5.png"}
+  ],
+  "외국가곡": [
+    {name:"스와니강", file:"f1.png"},
+    {name:"거룩한 천사의 음성", file:"f2.png"},
+    {name:"오 솔레미오", file:"f3.png"},
+    {name:"보리수", file:"f4.png"},
+    {name:"메기의 추억", file:"f5.png"}
+  ],
+  "CM송": [
+    {name:"해태껌", file:"c1.png"},
+    {name:"브라보 콘", file:"c2.png"},
+    {name:"맛동산", file:"c3.png"},
+    {name:"진로소주", file:"c4.png"},
+    {name:"동요 메들리", file:"c5.png"}
+  ],
+  "만화영화": [
+    {name:"아톰", file:"a1.png"},
+    {name:"마린보이", file:"a2.png"},
+    {name:"아기사자 레오", file:"a3.png"},
+    {name:"황금박쥐", file:"a4.png"},
+    {name:"타이거 마스크", file:"a5.png"}
+  ]
+};
+
+let currentCategory = "";
+
+function openCategory(cat) {
+  currentCategory = cat;
+  document.getElementById("root").classList.add("hidden");
+  document.getElementById("songs").classList.remove("hidden");
+  document.getElementById("categoryTitle").innerText = cat;
+
+  const list = document.getElementById("songList");
+  list.innerHTML = "";
+
+  data[cat].forEach(song => {
+    const div = document.createElement("div");
+    div.className = "btn";
+    div.innerText = song.name;
+    div.onclick = () => openLyrics(song);
+    list.appendChild(div);
+  });
+}
+
+function openLyrics(song) {
+  document.getElementById("songs").classList.add("hidden");
+  document.getElementById("lyrics").classList.remove("hidden");
+
+  document.getElementById("songTitle").innerText = song.name;
+  document.getElementById("lyricsImg").src = song.file;
+}
+
+function goRoot() {
+  document.getElementById("songs").classList.add("hidden");
+  document.getElementById("root").classList.remove("hidden");
+}
+
+function goSongs() {
+  document.getElementById("lyrics").classList.add("hidden");
+  document.getElementById("songs").classList.remove("hidden");
+}
+</script>
+
 </body>
 </html>
