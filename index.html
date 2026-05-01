@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>노래 가사 찾기</title>
   <style>
     * { box-sizing: border-box; }
@@ -16,8 +17,9 @@
       text-align: center;
     }
     body > div {
-      width: 100vw;
+      width: 100%;
       min-height: 100vh;
+      min-height: 100dvh;
       padding: 24px;
     }
     .hidden { display: none; }
@@ -45,6 +47,7 @@
     }
     #lyrics {
       height: 100vh;
+      height: 100dvh;
       padding: 12px;
       display: grid;
       grid-template-rows: auto auto 1fr;
