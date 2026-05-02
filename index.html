@@ -37,6 +37,30 @@
       align-items: center;
       justify-content: center;
     }
+    .root-image {
+      width: min(100%, 420px);
+      height: auto;
+      margin: 0 0 12px;
+      display: block;
+    }
+    .root-menu {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(120px, 1fr));
+      gap: 10px 12px;
+      width: min(100%, 360px);
+    }
+    .root-menu .btn {
+      margin: 0;
+      min-height: 44px;
+      padding: 6px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.1;
+      white-space: normal;
+    }
     #root.hidden,
     #songs.hidden,
     #lyrics.hidden {
@@ -67,15 +91,18 @@
 
 <!-- ROOT PAGE -->
 <div id="root">
-  <h2>분야 선택</h2>
-  <div class="btn" onclick="openCategory('7080a')">7080a</div>
-  <div class="btn" onclick="openCategory('7080b')">7080b</div>
-  <div class="btn" onclick="openCategory('7080c')">7080c</div>
-  <div class="btn" onclick="openCategory('902000')">902000</div>
-  <div class="btn" onclick="openCategory('외국가곡')">외국가곡</div>
-  <div class="btn" onclick="openCategory('한국가곡')">한국가곡</div>
-  <div class="btn" onclick="openCategory('만화영화')">만화영화 주제가</div>
-  <div class="btn" onclick="openCategory('CM송')">CM송</div>
+  <img src="50.jpg" alt="" class="root-image">
+  <h2>72 노래방</h2>
+  <div class="root-menu">
+    <div class="btn" onclick="openCategory('7080a')">7080a</div>
+    <div class="btn" onclick="openCategory('7080b')">7080b</div>
+    <div class="btn" onclick="openCategory('7080c')">7080c</div>
+    <div class="btn" onclick="openCategory('902000')">902000</div>
+    <div class="btn" onclick="openCategory('외국가곡')">외국가곡</div>
+    <div class="btn" onclick="openCategory('한국가곡')">한국가곡</div>
+    <div class="btn" onclick="openCategory('만화영화')">만화영화 주제가</div>
+    <div class="btn" onclick="openCategory('CM송')">CM송</div>
+  </div>
 </div>
 
 <!-- SONG LIST PAGE -->
@@ -105,8 +132,8 @@ const data = {
     {name:"나 어떻게", file:"78b1.png"},
     {name:"한잔의 추억", file:"78b2.png"},
     {name:"사노라면", file:"78b3.png"},
-    {name:"한동안 뜸했었지", file:"78b4.png"},
-    {name:"남자는 배 여자는 항구", file:"78b5.png"}
+    {name:"빗속의 여인", file:"78b4.png"},
+    {name:"아파트", file:"78b5.png"}
   ],
   "7080c": [
     {name:"행복의 나라로", file:"78c1.png"},
