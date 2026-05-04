@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>노래 가사 찾기</title>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="72 노래방">
+  <meta property="og:description" content="노래 가사 찾기">
+  <meta property="og:image" content="50.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="72 노래방">
+  <meta name="twitter:description" content="노래 가사 찾기">
+  <meta name="twitter:image" content="50.jpg">
   <style>
     * { box-sizing: border-box; }
     html,
@@ -78,6 +86,36 @@
       justify-items: center;
       overflow: hidden;
     }
+    .lyrics-top-nav {
+      display: grid;
+      grid-template-columns: 88px 50px 88px;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+    .lyrics-viewer {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+    }
+    .song-nav {
+      width: 88px;
+      height: 88px;
+      padding: 12px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+    .song-nav:disabled {
+      cursor: default;
+      opacity: 0.25;
+    }
+    .song-nav img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
     #lyricsImg {
       width: 100%;
       height: 100%;
@@ -114,9 +152,19 @@
 
 <!-- LYRICS PAGE -->
 <div id="lyrics" class="hidden">
-  <img src="arrow.png" class="back" onclick="goSongs()">
+  <div class="lyrics-top-nav">
+    <button class="song-nav" id="prevSong" onclick="changeSong(-1)" aria-label="Previous song">
+      <img src="leftarrow.png" alt="">
+    </button>
+    <img src="arrow.png" class="back" onclick="goSongs()">
+    <button class="song-nav" id="nextSong" onclick="changeSong(1)" aria-label="Next song">
+      <img src="rightarrow.png" alt="">
+    </button>
+  </div>
   <h2 id="songTitle"></h2>
-  <img id="lyricsImg" src="">
+  <div class="lyrics-viewer">
+    <img id="lyricsImg" src="">
+  </div>
 </div>
 
 <script>
@@ -180,6 +228,7 @@ const data = {
 };
 
 let currentCategory = "";
+let currentSongIndex = 0;
 
 function openCategory(cat) {
   currentCategory = cat;
@@ -190,21 +239,47 @@ function openCategory(cat) {
   const list = document.getElementById("songList");
   list.innerHTML = "";
 
-  data[cat].forEach(song => {
+  data[cat].forEach((song, index) => {
     const div = document.createElement("div");
     div.className = "btn";
     div.innerText = song.name;
-    div.onclick = () => openLyrics(song);
+    div.onclick = () => openLyrics(index);
     list.appendChild(div);
   });
 }
 
-function openLyrics(song) {
+function openLyrics(index) {
+  currentSongIndex = index;
+  const song = data[currentCategory][currentSongIndex];
+
   document.getElementById("songs").classList.add("hidden");
   document.getElementById("lyrics").classList.remove("hidden");
 
+  showSong(song);
+}
+
+function showSong(song) {
   document.getElementById("songTitle").innerText = song.name;
   document.getElementById("lyricsImg").src = song.file;
+  updateSongNav();
+}
+
+function changeSong(direction) {
+  const nextIndex = currentSongIndex + direction;
+  const songs = data[currentCategory];
+
+  if (nextIndex < 0 || nextIndex >= songs.length) {
+    return;
+  }
+
+  currentSongIndex = nextIndex;
+  showSong(songs[currentSongIndex]);
+}
+
+function updateSongNav() {
+  const songs = data[currentCategory];
+  document.getElementById("prevSong").disabled = currentSongIndex === 0;
+  document.getElementById("nextSong").disabled = currentSongIndex === songs.length - 1;
 }
 
 function goRoot() {
